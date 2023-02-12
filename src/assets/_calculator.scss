@@ -1,0 +1,87 @@
+$btn-number-bg-color: #e2f1f8;
+$btn-number-bg-color--hover: darken($btn-number-bg-color, 10%);
+$btn-number-bg-color--active: darken($btn-number-bg-color, 20%);
+
+$btn-symbol-bg-color: #90caf9;
+$btn-symbol-bg-color--hover: darken($btn-symbol-bg-color, 10%);
+$btn-symbol-bg-color--active: darken($btn-symbol-bg-color, 20%);
+
+$btn-clear-bg-color: #b0bec5;
+$btn-clear-bg-color--hover: darken($btn-clear-bg-color, 10%);
+$btn-clear-bg-color--active: darken($btn-clear-bg-color, 20%);
+
+@mixin applyButtonColor($base, $hover, $active) {
+  background-color: $base;
+  &:hover {
+    background-color: $hover;
+  }
+  &:active {
+    background-color: $active;
+  }
+}
+
+.v-calculator {
+  max-width: 350px;
+  width: 350px;
+
+  &,
+  &__display,
+  &__btn {
+    font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
+    border: 1px solid black;
+  }
+
+  &__display {
+    width: 100%;
+    height: 120px;
+    background-color: black;
+    color: white;
+    &__error,
+    &__input {
+      width: 100%;
+      padding: .3em;
+      display: flex;
+      align-items: center;
+      justify-content: right;
+    }
+
+    &__input {
+      height: 80px;
+      font-size: 2em;
+    }
+    &__error {
+      height: 40px;
+      font-size: 0.8em;
+    }
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  &__btn {
+    font-size: 1rem;
+    height: 65px;
+    @include applyButtonColor($btn-number-bg-color, $btn-number-bg-color--hover, $btn-number-bg-color--active);
+
+    &--operator,
+    &--equal {
+      @include applyButtonColor($btn-symbol-bg-color, $btn-symbol-bg-color--hover, $btn-symbol-bg-color--active);
+    }
+
+    &--clear {
+      @include applyButtonColor($btn-clear-bg-color, $btn-clear-bg-color--hover, $btn-clear-bg-color--active);
+
+    }
+
+    &--equal {
+      grid-row: span 2;
+      height: auto;
+    }
+
+    &--zero {
+      grid-column: span 2;
+    }
+  }
+}
